@@ -21,16 +21,17 @@ public class RemoteConfig {
 
     @Bean
     public RedisCacheConfiguration cacheConfiguration() {
-        return RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(60)).disableCachingNullValues()
-                                      .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
+        return RedisCacheConfiguration //
+                                       .defaultCacheConfig() //
+                                       .entryTtl(Duration.ofMinutes(60)) //
+                                       .disableCachingNullValues() //
+                                       .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
     }
 
     @Bean
     public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
-        return (builder) -> builder.withCacheConfiguration("userCache", RedisCacheConfiguration.defaultCacheConfig()
-                                                                                               .entryTtl(Duration.ofSeconds(10)))
-                                   .withCacheConfiguration("customerCache", RedisCacheConfiguration.defaultCacheConfig()
-                                                                                                   .entryTtl(Duration.ofSeconds(5)));
+        return (builder) -> builder.enableStatistics().withCacheConfiguration("userCache", userCacheConfig())
+                                   .withCacheConfiguration("customerCache", customerCacheConfig());
     }
 
     @Bean
@@ -39,6 +40,10 @@ public class RemoteConfig {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(jedisConnectionFactory);
         return template;
+    }
+
+    RedisCacheConfiguration customerCacheConfig() {
+        return RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofSeconds(5));
     }
 
     @Bean
@@ -50,4 +55,9 @@ public class RemoteConfig {
         jedisConFactory.setPort(6379);
         return jedisConFactory;
     }
+
+    RedisCacheConfiguration userCacheConfig() {
+        return RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofSeconds(10));
+    }
+
 }

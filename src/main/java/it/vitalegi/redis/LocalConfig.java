@@ -23,5 +23,4 @@ public class LocalConfig {
         cacheManager.setCaches(Arrays.asList(userCache));
         return cacheManager;
     }
-
 }
