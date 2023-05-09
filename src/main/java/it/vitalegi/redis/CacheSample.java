@@ -20,16 +20,21 @@ public class CacheSample implements CommandLineRunner {
         user.setId(1);
         user.setName("aaa");
         userService.addUser(user);
+        log.info("id 1");
         log.info("User: {}", userService.getUserById(1));
         log.info("User: {}", userService.getUserById(1));
         log.info("User: {}", userService.getUserById(1));
 
         user = new User();
-        user.setId(null);
+        user.setId(2);
         user.setName("bbb");
         userService.addUser(user);
-        log.info("User: {}", userService.getUserById(null));
-        log.info("User: {}", userService.getUserById(null));
-        log.info("User: {}", userService.getUserById(null));
+        log.info("id 2");
+        log.info("User: {}", userService.getUserById(2));
+        log.info("User: {}", userService.getUserById(2));
+        log.info("User: {}", userService.getUserById(2));
+
+        log.info("id 3 (absent)");
+        log.info("User: {}", userService.getUserById(3));
     }
 }

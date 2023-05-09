@@ -11,21 +11,33 @@ $env:JAVA_HOME = 'C:\Program Files\Java\jdk-11.0.16.1'
 $env:PATH = $env:M2_HOME + '\bin;' + $env:JAVA_HOME + '\bin;' + $env:PATH
 ```
 
-## Local
-
-### Compile
+## Compile
 
 ```bash
 mvn clean package
 ```
 
-### Run
+## Run
+
+### Local
 
 ```bash
 $env:SPRING_PROFILES_ACTIVE='local'
 
 # run compiled app
-java -jar ./target/cosucce-0.0.1-SNAPSHOT.jar
+java -jar ./target/redis-0.0.1-SNAPSHOT.jar
+
+# run from maven
+./mvnw spring-boot:run
+```
+
+### Remote
+
+```bash
+$env:SPRING_PROFILES_ACTIVE='remote'
+
+# run compiled app
+java -jar ./target/redis-0.0.1-SNAPSHOT.jar
 
 # run from maven
 ./mvnw spring-boot:run
