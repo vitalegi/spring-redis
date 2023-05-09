@@ -1,4 +1,6 @@
-# README
+# Spring Redis Playground
+
+Playground app used to showcase the integration of a distributed cache with Spring Boot, covering local (windows), unit test and production-like situations.
 
 ## Prerequisites
 
