@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class RedisSample implements CommandLineRunner {
+public class CacheSample implements CommandLineRunner {
 
     @Autowired
     UserService userService;
@@ -23,5 +23,13 @@ public class RedisSample implements CommandLineRunner {
         log.info("User: {}", userService.getUserById(1));
         log.info("User: {}", userService.getUserById(1));
         log.info("User: {}", userService.getUserById(1));
+
+        user = new User();
+        user.setId(null);
+        user.setName("bbb");
+        userService.addUser(user);
+        log.info("User: {}", userService.getUserById(null));
+        log.info("User: {}", userService.getUserById(null));
+        log.info("User: {}", userService.getUserById(null));
     }
 }

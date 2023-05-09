@@ -19,7 +19,7 @@ public class UserService {
     }
 
     @Cacheable(value = "userCache")
-    public User getUserById(int id) {
+    public User getUserById(Integer id) {
         log.info("Search user, id {}", id);
         return users.stream().filter(u -> u.getId() == id).findFirst().orElseThrow(RuntimeException::new);
     }
