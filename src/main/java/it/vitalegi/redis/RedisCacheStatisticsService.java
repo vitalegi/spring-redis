@@ -17,15 +17,16 @@ public class RedisCacheStatisticsService {
     @Autowired
     CacheManager cacheManager;
 
-    @Scheduled(fixedDelay = 100)
+    @Scheduled(fixedDelay = 5000)
     void stats() {
+        log.info("retrieve statistics");
         cacheManager.getCacheNames().forEach(this::stats);
     }
 
     void stats(String cacheName) {
         RedisCache cache = (RedisCache) cacheManager.getCache(cacheName);
         CacheStatistics s = cache.getStatistics();
-        log.info("CACHE_STATISTICS name={}, hits={}, deletes={}, gets={}, misses={}", cacheName, s.getHits(),
-                s.getDeletes(), s.getGets(), s.getMisses(), s.getPuts());
+        log.info("CACHE_STATISTICS name={}, hits={}, deletes={}, gets={}, misses={}, puts={}", cacheName, s.getHits()
+                , s.getDeletes(), s.getGets(), s.getMisses(), s.getPuts());
     }
 }
