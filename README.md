@@ -2,6 +2,8 @@
 
 Playground app used to showcase the integration of a distributed cache with Spring Boot, covering local (windows), unit test and production-like situations.
 
+If you are on windows and want to use a "real" Redis instance, you can try <https://github.com/tporadowski/redis>.
+
 ## Prerequisites
 
 - JDK 11
